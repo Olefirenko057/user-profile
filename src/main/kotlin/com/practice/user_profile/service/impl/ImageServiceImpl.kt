@@ -11,6 +11,7 @@ import java.util.*
 @Service
 class ImageServiceImpl : ImageService {
 
+
     override fun uploadAvatar(file: MultipartFile) : String {
         if(file.isEmpty) {
             throw FileNotFoundException("File is empty!")
@@ -18,7 +19,7 @@ class ImageServiceImpl : ImageService {
         val mimeType = file.contentType
         if(mimeType != null &&
             listOf("image/jpeg","image/jpg","image/png").contains(mimeType.lowercase())) {
-            val ext = mimeType.split("/")[1]
+            val ext = "." + mimeType.split("/")[1]
             val uploadedFile = File(System.getProperty("user.dir") + "/" + UUID.randomUUID().toString() + ext)
             file.transferTo(uploadedFile)
             return uploadedFile.absolutePath
